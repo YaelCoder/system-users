@@ -18,6 +18,10 @@ class CreateTableCredentials extends Migration
                 'type'       => 'INT',
                 'unsigned'   => true,
             ],
+            'username' => [
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+            ],
             'password' => [
                 'type'       => 'VARCHAR',
                 'constraint' => '255',
