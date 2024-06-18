@@ -42,6 +42,7 @@ class AdminSeeder extends Seeder
 
         $credentials = [
             'id_user' => $userID,
+            'username' => 'ADMIN',
             'password' => password_hash('admin1234', PASSWORD_DEFAULT),
         ];
 
