@@ -33,7 +33,7 @@ class AuthController extends ResourceController
         try {
             $credential = new Credentials();
             $login = new UserLogs();
-            /* $userModel = new Users(); */
+            $userModel = new Users();
 
             $user = $credential->getByUsername($username);
 
@@ -44,13 +44,13 @@ class AuthController extends ResourceController
                 ], 401);
             }
 
-/*             $fullUser = $userModel->find($user['id_user']);
+            $fullUser = $userModel->find($user['id_user']);
             if ($fullUser['status'] !== 'activo') {
                 return $this->respond([
                     'status' => 'error',
                     'message' => 'User account is inactive',
                 ], 403);
-            } */
+            }
 
             $data = [
                 'id_user' => $user['id_user'],
