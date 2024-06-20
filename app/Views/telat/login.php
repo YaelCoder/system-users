@@ -152,7 +152,7 @@
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="<?= base_url(); ?>/resources/js/requests.js"></script>
+    <script src="<?= base_url(); ?>/resources/js/auth.js"></script>
     <script>
         function mostrarPassword() {
             var passwordField = document.getElementById('txtPassword');

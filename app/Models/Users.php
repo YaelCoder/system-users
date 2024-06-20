@@ -7,7 +7,7 @@ use CodeIgniter\Model;
 class Users extends Model
 {
     protected $table            = 'user';
-    protected $primaryKey       = 'id';
+    protected $primaryKey       = 'id_user';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
@@ -69,9 +69,10 @@ class Users extends Model
 
     public function getUsersWithRelations()
     {
-        return $this->select('user.*, address.*, user_type.*')
+        return $this->select('user.*, address.*, user_type.*, credential.username')
                     ->join('address', 'address.id_address = user.id_address', 'left')
                     ->join('user_type', 'user_type.id_user_type = user.id_user_type', 'left')
+                    ->join('credential', 'credential.id_user = user.id_user', 'left')
                     ->findAll();
     }
 }

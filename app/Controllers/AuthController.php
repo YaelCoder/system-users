@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\Credentials;
 use App\Models\UserLogs;
+use App\Models\Users;
 use CodeIgniter\RESTful\ResourceController;
 use Config\Services;
 use Exception;
@@ -32,6 +33,7 @@ class AuthController extends ResourceController
         try {
             $credential = new Credentials();
             $login = new UserLogs();
+            /* $userModel = new Users(); */
 
             $user = $credential->getByUsername($username);
 
@@ -41,6 +43,14 @@ class AuthController extends ResourceController
                     'message' => 'Invalid username or password',
                 ], 401);
             }
+
+/*             $fullUser = $userModel->find($user['id_user']);
+            if ($fullUser['status'] !== 'activo') {
+                return $this->respond([
+                    'status' => 'error',
+                    'message' => 'User account is inactive',
+                ], 403);
+            } */
 
             $data = [
                 'id_user' => $user['id_user'],

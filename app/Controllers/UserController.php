@@ -86,8 +86,67 @@ class UserController extends BaseController
         }
     }
 
-    public function reportList()
+    public function editUser($id)
     {
-        // regresar un reporte en un archivo de todos los usuarios
+        $request = service('request');
+        $data = $request->getRawInput();
+
+        $validation = \Config\Services::validation();
+        $validation->setRules([
+            'firstname' => 'required',
+            'lastname'  => 'required',
+            'gender'    => 'required',
+            'email'     => 'required|valid_email',
+            'phone'     => 'required|numeric',
+            'id_address' => 'required',
+            'id_user_type' => 'required',
+            'status'    => 'required',
+            'username'  => 'required',
+        ]);
+
+        if (!$validation->run($data)) {
+            return $this->response->setStatusCode(400)
+                ->setJSON(['error' => $validation->getErrors()]);
+        }
+
+        try {
+            $userModel = new Users();
+            $credentialsModel = new Credentials();
+
+            // Actualizar usuario
+            if (!$userModel->update($id, [
+                'firstname' => $data['firstname'],
+                'lastname'  => $data['lastname'],
+                'gender'    => $data['gender'],
+                'email'     => $data['email'],
+                'phone'     => $data['phone'],
+                'id_address' => $data['id_address'],
+                'id_user_type' => $data['id_user_type'],
+                'status'    => $data['status']
+            ])) {
+                $errors = $userModel->errors();
+                log_message('error', 'Error al actualizar el usuario: ' . json_encode($errors));
+                throw new \Exception('Error al actualizar el usuario: ' . json_encode($errors));
+            }
+
+            // Actualizar credenciales
+            if (!$credentialsModel->update($id, [
+                'username' => $data['username'],
+                'password' => !empty($data['password']) ? password_hash($data['password'], PASSWORD_DEFAULT) : $credentialsModel->find($id)['password']
+            ])) {
+                $errors = $credentialsModel->errors();
+                log_message('error', 'Error al actualizar las credenciales del usuario: ' . json_encode($errors));
+                throw new \Exception('Error al actualizar las credenciales del usuario: ' . json_encode($errors));
+            }
+
+            return $this->response->setStatusCode(200)
+                ->setJSON([
+                    'message' => 'Usuario actualizado con éxito',
+                    'id_user' => $id
+                ]);
+        } catch (\Exception $e) {
+            return $this->response->setStatusCode(500)
+                ->setJSON(['error' => $e->getMessage()]);
+        }
     }
 }

@@ -32,7 +32,8 @@ class AddressController extends BaseController
 
             return $this->response->setStatusCode(201)->setJSON(['message' => 'success']);
         } catch(\Exception $e) {
-            throw $e->getMessage();
+            return $this->response->setStatusCode(500, 'Internal Server Error')
+                ->setJSON(['error' => $e->getMessage()]);
         }
     }
 }

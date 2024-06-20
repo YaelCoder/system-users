@@ -49,7 +49,10 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.datatables.net/v/bs5/jq-3.7.0/jszip-3.10.1/dt-2.0.8/b-3.0.2/b-html5-3.0.2/r-3.0.2/datatables.min.js"></script>
-    <script src="<?= base_url(); ?>/resources/js/requests.js"></script>
+    <script src="<?= base_url(); ?>/resources/js/users.js"></script>
+    <script src="<?= base_url(); ?>/resources/js/address.js"></script>
+    <script src="<?= base_url(); ?>/resources/js/userType.js"></script>
+    <script src="<?= base_url(); ?>/resources/js/auth.js"></script>
 </body>
 
 </html>

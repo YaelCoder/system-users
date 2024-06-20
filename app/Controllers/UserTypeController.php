@@ -31,8 +31,9 @@ class UserTypeController extends BaseController
             $model->save($data);
 
             return $this->response->setStatusCode(201)->setJSON(['message' => 'success']);
-        } catch(\Exception $e) {
-            throw $e->getMessage();
+        } catch (\Exception $e) {
+            return $this->response->setStatusCode(500, 'Internal Server Error')
+                ->setJSON(['error' => $e->getMessage()]);
         }
     }
 }
