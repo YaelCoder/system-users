@@ -38,7 +38,7 @@ class Credentials extends Model
     protected $validationRules      = [
         'id_user' => 'required',
         'username' => 'required',
-        'password' => 'required|min_length[8]'
+        'password' => 'required'
     ];
     protected $validationMessages   = [];
     protected $skipValidation       = false;

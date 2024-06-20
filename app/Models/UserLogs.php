@@ -16,6 +16,7 @@ class UserLogs extends Model
         'id_user',
         'login_date',
         'ip_address',
+        'status',
         'created_at',
         'updated_at', 
         'deleted_at'
@@ -39,6 +40,7 @@ class UserLogs extends Model
         'id_user' => 'required',
         'login_date' => 'required',
         'ip_address' => 'required',
+        'status' => 'required'
     ];
     protected $validationMessages   = [];
     protected $skipValidation       = false;

@@ -19,7 +19,7 @@
             <div class="card-body">
                 <i class="bi bi-person-lines-fill"></i>
                 <p class="card-text">Visualiza toda la lista de usuarios</p>
-                <a href="#" class="btn btn-primary">Ver listado</a>
+                <a href="/users-list" class="btn btn-primary">Ver listado</a>
             </div>
         </div>
     </div>
@@ -29,17 +29,7 @@
             <div class="card-body">
                 <i class="bi bi-person-fill-add"></i>
                 <p class="card-text">Agrega un nuevo usuario</p>
-                <a href="#" class="btn btn-primary">Agregar</a>
-            </div>
-        </div>
-    </div>
-    <div class="col-sm-6 mb-3">
-        <div class="card text-center">
-            <h5 class="card-header">Reportes de usuarios</h5>
-            <div class="card-body">
-                <i class="bi bi-person-fill-down"></i>
-                <p class="card-text">Aqui puedes decargar la lista de reportes de usuarios.</p>
-                <a href="#" class="btn btn-primary">Decargar reporte</a>
+                <a href="/add-users" class="btn btn-primary">Agregar</a>
             </div>
         </div>
     </div>

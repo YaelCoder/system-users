@@ -15,7 +15,7 @@ class Users extends Model
     protected $allowedFields    = [
         'firstname',
         'lastname',
-        'gender,',
+        'gender',
         'email',
         'phone',
         'id_address',
@@ -44,9 +44,9 @@ class Users extends Model
     protected $validationRules      = [
         'firstname' => 'required',
         'lastname' => 'required',
-        'gender,' => 'required',
+        'gender' => 'required',
         'email' => 'required|valid_email',
-        'phone' => 'required|numeric|min_lenght[10]',
+        'phone' => 'required',
         'id_address' => 'required|numeric',
         'id_user_type' => 'required|numeric',
         'register_date' => 'required',
@@ -66,4 +66,12 @@ class Users extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    public function getUsersWithRelations()
+    {
+        return $this->select('user.*, address.*, user_type.*')
+                    ->join('address', 'address.id_address = user.id_address', 'left')
+                    ->join('user_type', 'user_type.id_user_type = user.id_user_type', 'left')
+                    ->findAll();
+    }
 }

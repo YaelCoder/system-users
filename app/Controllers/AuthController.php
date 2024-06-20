@@ -45,7 +45,8 @@ class AuthController extends ResourceController
             $data = [
                 'id_user' => $user['id_user'],
                 'login_date' => date('Y-m-d H:i:s'),
-                'ip_address' => $ip
+                'ip_address' => $ip,
+                'status' => 'login'
             ];
 
             $login->insert($data);
@@ -59,6 +60,35 @@ class AuthController extends ResourceController
             return $this->respond([
                 'status' => 'error',
                 'message' => 'An error occurred during login: ' . $e->getMessage(),
+            ], 500);
+        }
+    }
+
+    public function logout()
+    {
+        $userDataHeader = $this->request->header('User-Data');
+        $userData = $userDataHeader ? $userDataHeader->getValue() : null;
+        $userDataArray = $userData ? json_decode($userData, true) : [];
+
+        $data = [
+            'id_user' => $userDataArray['id_user'] ?? null,
+            'login_date' => date('Y-m-d H:i:s'),
+            'ip_address' => $this->request->getIPAddress(),
+            'status' => 'logout'
+        ];
+
+        try {
+            $login = new UserLogs();
+            $login->insert($data);
+            
+            return $this->respond([
+                'status' => 'success',
+                'message' => 'Logout successful'
+            ], 200);
+        } catch (Exception $e) {
+            return $this->respond([
+                'status' => 'error',
+                'message' => 'An error occurred during logout: ' . $e->getMessage(),
             ], 500);
         }
     }

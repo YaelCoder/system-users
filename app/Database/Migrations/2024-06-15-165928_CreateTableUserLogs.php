@@ -25,6 +25,10 @@ class CreateTableUserLogs extends Migration
                 'type'       => 'VARCHAR',
                 'constraint' => '45',
             ],
+            'status' => [
+                'type'  => 'VARCHAR',
+                'constraint' => '10'
+            ]
         ]);
         $this->forge->addKey('id_login', true);
         $this->forge->addForeignKey('id_user', 'user', 'id_user', 'CASCADE', 'CASCADE');

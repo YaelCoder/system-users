@@ -13,4 +13,24 @@ class Home extends BaseController
     {
         return view('telat/dashboard/index');
     }
+
+    public function userList()
+    {
+        return view('telat/users/index');
+    }
+
+    public function addUsers()
+    {
+        return view('telat/users/form');
+    }
+
+    public function address()
+    {
+        return view('telat/address/index');
+    }
+
+    public function userType()
+    {
+        return view('telat/user-type/index');
+    }
 }
