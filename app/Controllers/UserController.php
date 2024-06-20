@@ -113,7 +113,6 @@ class UserController extends BaseController
             $userModel = new Users();
             $credentialsModel = new Credentials();
 
-            // Actualizar usuario
             if (!$userModel->update($id, [
                 'firstname' => $data['firstname'],
                 'lastname'  => $data['lastname'],
@@ -129,7 +128,6 @@ class UserController extends BaseController
                 throw new \Exception('Error al actualizar el usuario: ' . json_encode($errors));
             }
 
-            // Actualizar credenciales
             if (!$credentialsModel->update($id, [
                 'username' => $data['username'],
                 'password' => !empty($data['password']) ? password_hash($data['password'], PASSWORD_DEFAULT) : $credentialsModel->find($id)['password']
